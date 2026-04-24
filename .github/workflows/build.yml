@@ -17,11 +17,11 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Build (C++)
-      run: msbuild Autocrack.sln /p:Configuration=Release /p:Platform=x64
+      run: msbuild Autocrack/Autocrack.sln /p:Configuration=Release /p:Platform=x64
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: autocrack-build
         path: |
-          **/x64/Release/**
+          Autocrack/**/x64/Release/**
