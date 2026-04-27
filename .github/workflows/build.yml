@@ -1,0 +1,27 @@
+name: Build Autocrack
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build (C++)
+      run: msbuild Autocrack/Autocrack.sln /p:Configuration=Release /p:Platform=x64
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: autocrack-build
+        path: |
+          Autocrack/**/x64/Release/**
